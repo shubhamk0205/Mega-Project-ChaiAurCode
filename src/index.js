@@ -11,6 +11,15 @@ dotenv.config({
 // A semicolon is added before the IIFE to prevent issues when concatenating with other files
 
 connectDB()
+.then(()=>{
+    app.listen(process.env.PORT || 8000 ,()=>{
+        console.log(`Server is running on port ${process.env.PORT}`);
+    })
+})
+.catch((err)=>{
+    console.log("MongoDb connection error!!", err);
+    process.exit(1);
+})
 
 
 
