@@ -16,6 +16,6 @@ app.use(cookieParser());
 import userRouter from './routes/user.routes.js'
 
 //router declaration
-app.use("/api/v1/users" , userRouter)
+app.use("http://localhost:8000/api/v1/users" , userRouter)
 
 export default app;
