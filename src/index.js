@@ -1,23 +1,22 @@
-
 import dotenv from "dotenv";
-import express from "express";
 import connectDB from "./db/index.js";
-const app = express();
+import app from "./app.js";
+
 dotenv.config({
-    path: "./env"
+    path: "./.env"
 });
 
 //IIFE it is a function that is executed immediately after it is created
 // A semicolon is added before the IIFE to prevent issues when concatenating with other files
 
 connectDB()
-.then(()=>{
-    app.listen(process.env.PORT || 8000 ,()=>{
-        console.log(`Server is running on port ${process.env.PORT}`);
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Server is running on port ${process.env.PORT || 8000}`);
     })
 })
-.catch((err)=>{
-    console.log("MongoDb connection error!!", err);
+.catch((err) => {
+    console.log("MongoDB connection error!!", err);
     process.exit(1);
 })
 
