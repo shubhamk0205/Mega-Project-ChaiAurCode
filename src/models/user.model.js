@@ -1,4 +1,3 @@
-import { timeStamp } from "console";
 import mongoose,{Schema} from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -56,11 +55,11 @@ userSchema.pre("save", async function (next) {
 }
 );
 
-userSchema.method.isPasswordCorrect = async function (password) {
+userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-userSchema.method.generateAccessToken = function () {
+userSchema.methods.generateAccessToken = function () {
     return jwt.sign({
         id: this._id,
         email: this.email,
@@ -71,7 +70,7 @@ userSchema.method.generateAccessToken = function () {
             });
 }
 
-userSchema.method.generateRefreshToken = function () {
+userSchema.methods.generateRefreshToken = function () {
     return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN, { expiresIn: process.env.REFRESH_TOKEN_EXPIRE });
 }
 
